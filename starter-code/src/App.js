@@ -1,18 +1,47 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Contact from './components/Contact';
+import myData from './contacts.json';
 import './App.css';
 
+
 class App extends Component {
+  state = {
+    data: myData.slice(0,5)
+  }
+
+  AddRandomContact = () => {
+    let randomContact = myData[Math.floor(myData.length * Math.random())] 
+    // in this.state.data;
+    console.log(randomContact)
+    this.setState({
+      data: this.state.data.concat(randomContact)
+    });
+  }
+  SortByName = () => {
+    this.setState({
+      data: this.state.data.sort((a, b) => a.name > b.name )
+    })
+  }
+  SortByPopularity = () => {
+    this.setState({
+      data: this.state.data.sort((a,b) => a.popularity < b.popularity)
+    })
+  }
+  DeleteContact = (e) => {
+
+    let rand = this.state.data
+    rand.splice(e, 1)
+    this.setState({
+      data: rand
+    })
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+          <button onClick={this.AddRandomContact}>Add Random Contact</button>
+          <button onClick={this.SortByName}>Sort by name</button>
+          <button onClick={this.SortByPopularity}>Sort by popularity</button>
+          <Contact data={this.state.data} delete={this.DeleteContact}/>
       </div>
     );
   }
