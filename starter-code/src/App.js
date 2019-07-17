@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Contact from './components/Contact';
 import myData from './contacts.json';
 import './App.css';
+import AddContact from './components/AddContact';
 
 
 class App extends Component {
@@ -9,10 +10,8 @@ class App extends Component {
     data: myData.slice(0,5)
   }
 
-  AddRandomContact = () => {
-    let randomContact = myData[Math.floor(myData.length * Math.random())] 
-    // in this.state.data;
-    console.log(randomContact)
+  AddRandomContact = (movie) => {
+    let randomContact = movie || myData[Math.floor(myData.length * Math.random())];
     this.setState({
       data: this.state.data.concat(randomContact)
     });
@@ -38,6 +37,7 @@ class App extends Component {
   render() {
     return (
       <div>
+          <AddContact addContact={this.AddRandomContact}/>
           <button onClick={this.AddRandomContact}>Add Random Contact</button>
           <button onClick={this.SortByName}>Sort by name</button>
           <button onClick={this.SortByPopularity}>Sort by popularity</button>
