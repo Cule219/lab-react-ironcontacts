@@ -3,6 +3,7 @@ import Contact from './components/Contact';
 import myData from './contacts.json';
 import './App.css';
 import AddContact from './components/AddContact';
+import TextAreaAndSelect from './components/TextAreaAndSelect';
 
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
   render() {
     return (
       <div>
+          <TextAreaAndSelect />
           <AddContact addContact={this.AddRandomContact}/>
           <button onClick={this.AddRandomContact}>Add Random Contact</button>
           <button onClick={this.SortByName}>Sort by name</button>
